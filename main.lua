@@ -1,13 +1,20 @@
+-- main library
 local playtomic = require("playtomic")
+
+-- some test suite to demonstrate certain features
 local playtomicTestSuite = require("playtomic-tests")
+
+-- GUI for test suite
 local button = require("button")
 
+-- using the wrapper by Angelo
 playtomic.makeDefault()
+
+-- initialize Playtomic
 analytics.init(5751,"5a80457160d84193","6f1474a2afce4583a612c2c8c1c8ce")
 
 
 -- attach events to buttons
-
 -- BASIC
 button.createButton("Basic: CustomMetric",40,150,250,20,playtomicTestSuite.CustomMetric)
 button.createButton("Basic: LevelCounterMetric",40,180,250,20,playtomicTestSuite.LevelCounterMetric)
@@ -30,12 +37,3 @@ button.createButton("Basic: HeatMap",40,270,250,20,playtomicTestSuite.HeatMap)
 	-- LEADERBOARDS
 	button.createButton("Submit Scores (Simple)",40,60,250,20,playtomicTestSuite.SubmitScoreSimple)
 	button.createButton("Submit Scores (Advanced)",40,90,250,20,playtomicTestSuite.SubmitScoreAdvanced)
-
-
-
--- tests
---playtomicTestSuite.LoadGameVars()
---playtomicTestSuite.SubmitScoreSimple()
---playtomicTestSuite.SubmitScoreAdvanced()
---playtomicTestSuite.ShowScores()
---playtomicTestSuite.SavePlayerLevel()

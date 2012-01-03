@@ -3,7 +3,7 @@
 	Feel free to dig into the playtomic.lua file to see for yourself.
 	
 	Note: We are using a conveniently made wrapper created by Angelo @Yobonja Games.
-	This was done using the makeDefault() call in main.lua, which overwrites CoronaSDK's analytics() function
+	This wrapper is activated using the makeDefault() call in main.lua, which overwrites CoronaSDK's analytics() function
 	If you choose otherwise, don't call makeDefault.
 	
 ]]--
