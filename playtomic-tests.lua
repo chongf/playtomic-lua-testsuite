@@ -9,74 +9,99 @@
 ]]--
 
 local TEST = {}
-	
-	-- CUSTOM METRICS, LEVEL METRICS, AND HEATMAPS
+		
+	-- BASIC METRICS
 	-- tried and tested in Blast Monkeys, a top iOS+Android Game -> https://market.android.com/details?id=com.yobonja.blastmonkeysfree&hl=en	
 	-- tried and tested in Ghost vs Monsters sample. To see implementation -> https://github.com/chongf/Ghost-vs-Monsters-Playtomic
-	
-	-- CUSTOM METRIC
-	TEST.CustomMetric = function()
-		local eventData = {
-			type = "custom",
-			eventGroup = "MainMenu"
-		}
 
-		analytics.logEvent("SomeEventHappened",eventData);
-		analytics.forceSend();		
-	end
-	
-	-- HEATMAP
-	TEST.HeatMap = function()
-		local eventData = {
-			type = "heatmap",
-			mapName = "level1",
-			x = math.random(100),
-			y = math.random(100),
-		}
-
-		analytics.logEvent("deathposition",eventData); -- eg: we track positions where players get killed
-		analytics.forceSend();	
-	end
-		
-	-- LEVEL METRICS
-		-- LEVEL COUNTER METRIC
-		TEST.LevelCounterMetric = function()
-			eventData = {
-				type = "counter",
-				levelName = "level1",
-
+		-- CUSTOM METRICS
+		TEST.CustomMetric = function()
+			local eventData = {
+				type = "custom",
+				eventGroup = "MainMenu"
 			}
 
-			analytics.logEvent("Win",eventData); -- eg: we log wins on level1
+			analytics.logEvent("SomeEventHappened",eventData);
 			analytics.forceSend();		
 		end
-
-		-- LEVEL AVERAGE METRIC
-		TEST.LevelAverageMetric = function()
-			eventData = {
-				type = "average",
-				levelName = "level1",
-				value = math.random(10000) + 1000, -- randomized for fun
-
+	
+		-- HEATMAP
+		TEST.HeatMap = function()
+			local eventData = {
+				type = "heatmap",
+				mapName = "level1",
+				x = math.random(100),
+				y = math.random(100),
 			}
 
-			analytics.logEvent("AverageTime",eventData); -- eg: we track average time to complete level1
+			analytics.logEvent("deathposition",eventData); -- eg: we track positions where players get killed
 			analytics.forceSend();	
 		end
+		
+		-- LEVEL METRICS
+			-- LEVEL COUNTER METRIC
+			TEST.LevelCounterMetric = function()
+				eventData = {
+					type = "counter",
+					levelName = "level1",
 
-		-- LEVEL RANGED METRIC
-		TEST.LevelRangedMetric = function()
-			eventData = {
-				type = "ranged",
-				levelName = "level1",
-				value = math.random(100), -- randomized for fun
+				}
 
-			}
+				analytics.logEvent("Win",eventData); -- eg: we log wins on level1
+				analytics.forceSend();		
+			end
 
-			analytics.logEvent("CoinsCollected",eventData); -- eg: we track coins collected in level1
-			analytics.forceSend();	
-		end
-							
+			-- LEVEL AVERAGE METRIC
+			TEST.LevelAverageMetric = function()
+				eventData = {
+					type = "average",
+					levelName = "level1",
+					value = math.random(10000) + 1000, -- randomized for fun
+
+				}
+
+				analytics.logEvent("AverageTime",eventData); -- eg: we track average time to complete level1
+				analytics.forceSend();	
+			end
+
+			-- LEVEL RANGED METRIC
+			TEST.LevelRangedMetric = function()
+				eventData = {
+					type = "ranged",
+					levelName = "level1",
+					value = math.random(100), -- randomized for fun
+
+				}
+
+				analytics.logEvent("CoinsCollected",eventData); -- eg: we track coins collected in level1
+				analytics.forceSend();	
+			end
+
+			-- GEO IP
+			TEST.GeoIP = function()
+				analytics.GeoIP.Lookup(TEST.GeoIP_Callback);
+			end
+
+			TEST.GeoIP_Callback = function(country,response)
+				if response.Success then
+					print("Player is from " .. country.Name .. " (" .. country.Code .. ")")
+				else
+					print("Error calling GeoIP")
+				end
+			end
+
+			-- LINK TRACKING
+				-- Playtomic opens the link for you
+				TEST.LinkTrackingOpen = function()
+					analytics.Link.Open("http://google.com/", "Website", "MyLinks");
+				end
+
+				-- You open the link yourself
+				TEST.LinkTrackingTrack = function()
+					analytics.Link.Open("http://google.com/", "Website", "MyLinks");
+				end
+				
+											
 	-- DATA METRICS	( NOTE: you need to enable Data API in the Playtomic Dashboard. Settings-> Game Details -> Data API)
 		-- LOAD VIEWS
 		TEST.DataMetricsLoadViews = function()
