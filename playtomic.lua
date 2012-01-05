@@ -474,7 +474,7 @@ setfenv(1, Playtomic)
 				debug("LevelCounterMetric:", name, level, unique)	
 				if unique then		
 					local key = name .. "." .. tostring(level);
-					if LevelCounter[key] then return end
+					if LevelCounters[key] then return end
 					LevelCounters[key] = 1;
 				end
 				Send("lc/" .. Clean(name) .. "/" .. Clean(level));
