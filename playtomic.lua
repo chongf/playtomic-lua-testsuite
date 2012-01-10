@@ -209,9 +209,9 @@ setfenv(1, Playtomic)
 					return;
 				end
 				
-				for i=#frozenqueue-1,0,-1 do
+				for i= #frozenqueue,0,-1 do
 					this.Queue(frozenqueue[i]);
-					frozenqueue.splice(i, 1);
+					frozenqueue[i] = nil
 					
 					if(this.Ready)then
 						this.Send();
