@@ -679,7 +679,7 @@ setfenv(1, Playtomic)
 
 
 	local function SendAPIRequest(section, action, complete, callback, postdata)
-		local url = URLStub .. "v3/api.aspx?" .. URLTail .. "&debug=y&r=" .. math.random() .. "Z";
+		local url = URLStub .. "v3/api.aspx?" .. URLTail .. "&r=" .. math.random() .. "Z";
 		local timestamp = tostring(os.time());
 		local nonce = Encode.MD5( (os.time() * math.random()) .. GUID);
 		
@@ -1508,6 +1508,7 @@ setfenv(1, Playtomic)
 				postdata.day = conditional(options.day, options.day, 0);
 				postdata.month = conditional(options.month, options.month, 0);
 				postdata.year = conditional(options.year, options.year, 0);
+				postdata.metric = Clean(metric);
 				
 				SendAPIRequest(SECTIONS["data"], ACTIONS["data-custommetric"], CustomMetricComplete, callback, postdata);
 			end,

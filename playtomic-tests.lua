@@ -125,6 +125,8 @@ local TEST = {}
 		end
 			-- CALLBACK FOR LOAD CUSTOM METRIC
 			TEST.DataMetricsLoadCustomMetric_Callback = function(data,response)
+				--print("data: ",data)
+				--print("response: ", response)
 				if response.Success then
 					print(data.Name .. " has value of " .. data.Value)
 				else
