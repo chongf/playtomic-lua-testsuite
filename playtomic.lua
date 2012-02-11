@@ -56,6 +56,7 @@ local network = network
 local I, nI = {}, {}
 
 --[[ change some of the json behavior so it returns nil instead of throwing a runtime error when it gets invalid input. ]]--
+--[[ Note: As of build 741 corona has switched to the dkjson.lua module making this fix unnecessary. ]]--
 local function json_decode( result )
 	result[1] = _json.decode( result[1] )
 end
@@ -1855,8 +1856,8 @@ function init( swfid, guid, apikey, debug )
 end
 
 function logEvent( event, eventData )
-	ed = eventData or { }
-	eventType = ed.type or "custom"
+	local ed = eventData or { }
+	local eventType = ed.type or "custom"
 	if event == "Play" then
 		Log.Play()
 	elseif eventType == "custom" then
