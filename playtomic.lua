@@ -597,7 +597,7 @@ setfenv(1, Playtomic)
 			function Log.UnFreeze()
 				Frozen = false;
 				if(#FrozenQueue > 0)then
-					Request.MassQueue();
+					Request.MassQueue(FrozenQueue);
 				end
 			end
 			
